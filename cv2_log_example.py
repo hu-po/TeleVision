@@ -78,15 +78,31 @@ finally:
     # Create histogram plots for the timing data
     plt.figure(figsize=(10, 6))
     plt.hist(image_processing_times, bins=100, alpha=0.5, label='Image Processing Time')
+    plt.xlabel('Time (seconds)')
+    plt.ylabel('Number of Frames')
+    plt.title('Timing Analysis Histograms')
+    plt.legend(loc='upper right')
+    plt.grid(True)
+    plt.savefig('timing_imgproc.png')
+
+
+    plt.figure(figsize=(10, 6))
     plt.hist(hands_times, bins=100, alpha=0.5, label='Hands Detection Time')
+    plt.xlabel('Time (seconds)')
+    plt.ylabel('Number of Frames')
+    plt.title('Timing Analysis Histograms')
+    plt.legend(loc='upper right')
+    plt.grid(True)
+    plt.savefig('timing_hand.png')
+
+    plt.figure(figsize=(10, 6))
     plt.hist(head_matrix_times, bins=100, alpha=0.5, label='Head Matrix Calculation Time')
     plt.xlabel('Time (seconds)')
     plt.ylabel('Number of Frames')
     plt.title('Timing Analysis Histograms')
     plt.legend(loc='upper right')
     plt.grid(True)
-    plt.savefig('timing_nocam.png')
-
+    plt.savefig('timing_head.png')
 
     plt.figure(figsize=(10, 6))
     plt.hist(camera_capture_times, bins=100, alpha=0.5, label='Camera Capture Time')

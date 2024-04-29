@@ -24,7 +24,7 @@ head_matrix_times = []
 
 try:
     while True:
-        print(f'Frame {len(camera_capture_times)}')
+        # print(f'Frame {len(camera_capture_times)}')
         start_cam = time.time()
         ret, frame = cap.read()
         if not ret:
@@ -38,7 +38,7 @@ try:
 
         # Image processing
         start_img_proc = time.time()
-        print('Processing image')
+        # print('Processing image')
         width = frame.shape[1]
         left_frame = frame[:, :width//2]
         right_frame = frame[:, width//2:]
@@ -52,7 +52,7 @@ try:
         image_processing_times.append(img_proc_time)
 
         # Hand detection
-        print('Detecting hands')
+        # print('Detecting hands')
         start_hands = time.time()
         left_hand = tv.left_hand
         right_hand = tv.right_hand
@@ -61,7 +61,7 @@ try:
         hands_times.append(hands_proc_time)
 
         # Head matrix calculation
-        print('Calculating head matrix')
+        # print('Calculating head matrix')
         start_head_matrix = time.time()
         head_matrix = tv.head_matrix
         end_head_matrix = time.time()
@@ -69,20 +69,30 @@ try:
         head_matrix_times.append(head_matrix_proc_time)
 
         # Example break condition for testing (e.g., run for 100 frames)
-        if len(camera_capture_times) >= 100:
+        if len(camera_capture_times) >= 1000:
             break
 
 finally:
     cap.release()
 
-    # Plotting the times
+    # Create histogram plots for the timing data
     plt.figure(figsize=(10, 6))
-    plt.plot(camera_capture_times, label='Camera Capture Time')
-    plt.plot(image_processing_times, label='Image Processing Time')
-    plt.plot(hands_times, label='Hands Detection Time')
-    plt.plot(head_matrix_times, label='Head Matrix Calculation Time')
-    plt.xlabel('Frame')
-    plt.ylabel('Time (seconds)')
-    plt.title('Timing Analysis')
-    plt.legend()
-    plt.savefig('timing_analysis.png')
+
+    # Histogram for camera capture times
+    plt.hist(camera_capture_times, bins=20, alpha=0.5, label='Camera Capture Time')
+
+    # Histogram for image processing times
+    plt.hist(image_processing_times, bins=20, alpha=0.5, label='Image Processing Time')
+
+    # Histogram for hands detection times
+    plt.hist(hands_times, bins=20, alpha=0.5, label='Hands Detection Time')
+
+    # Histogram for head matrix calculation times
+    plt.hist(head_matrix_times, bins=20, alpha=0.5, label='Head Matrix Calculation Time')
+
+    plt.xlabel('Time (seconds)')
+    plt.ylabel('Number of Frames')
+    plt.title('Timing Analysis Histograms')
+    plt.legend(loc='upper right')
+    plt.grid(True)
+    plt.savefig('timing_analysis_histograms.png')

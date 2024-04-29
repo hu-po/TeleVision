@@ -1,7 +1,7 @@
 import numpy as np
 import time
 import cv2
-from TeleVision import OpenTeleVision
+from TeleVision import TeleVision
 
 np.set_printoptions(precision=2, suppress=True)
 
@@ -20,7 +20,7 @@ if not cap.isOpened():
     print("Error: Unable to open camera")
     exit()
 
-tv = OpenTeleVision(resolution)
+tv = TeleVision(resolution)
 
 while True:
     start = time.time()

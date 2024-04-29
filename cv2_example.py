@@ -5,28 +5,27 @@ from TeleVision import TeleVision
 
 np.set_printoptions(precision=2, suppress=True)
 
-resolution = (480, 1280)
-
-# Create a VideoCapture object and open the input file
-cap = cv2.VideoCapture(0)  # 0 is usually the default camera
-
-# Set the resolution
-cap.set(cv2.CAP_PROP_FRAME_WIDTH, resolution[1])
-cap.set(cv2.CAP_PROP_FRAME_HEIGHT, resolution[0])
-cap.set(cv2.CAP_PROP_FPS, 60)  # Set FPS to 60
-
-# Check if camera opened successfully
+cap = cv2.VideoCapture(0)
+cap.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)
+cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 480)
+cap.set(cv2.CAP_PROP_FPS, 60)
 if not cap.isOpened():
     print("Error: Unable to open camera")
     exit()
 
-tv = TeleVision(resolution, stereo=True)
+tv = TeleVision((640, 480), stereo=True)
 
 while True:
     start = time.time()
     ret, frame = cap.read()
-    print(f'Frame shape: {frame.shape}')
     if ret:
+        print(f'Frame shape: {frame.shape}')
+        # Split the frame into left and right
+        width = frame.shape[1]
+        left_frame = frame[:, :width//2]
+        right_frame = frame[:, width//2:]
+        # Combine them into a new frame
+        frame = np.vstack((left_frame, right_frame))
         rgb_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
         tv.modify_shared_image(rgb_frame)
     end = time.time()

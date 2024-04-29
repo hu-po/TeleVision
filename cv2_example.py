@@ -11,8 +11,8 @@ resolution = (720, 1280)
 cap = cv2.VideoCapture(0)  # 0 is usually the default camera
 
 # Set the resolution
-# cap.set(cv2.CAP_PROP_FRAME_WIDTH, resolution[1])
-# cap.set(cv2.CAP_PROP_FRAME_HEIGHT, resolution[0])
+cap.set(cv2.CAP_PROP_FRAME_WIDTH, resolution[1])
+cap.set(cv2.CAP_PROP_FRAME_HEIGHT, resolution[0])
 cap.set(cv2.CAP_PROP_FPS, 60)  # Set FPS to 60
 
 # Check if camera opened successfully

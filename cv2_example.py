@@ -13,17 +13,20 @@ if not cap.isOpened():
     print("Error: Unable to open camera")
     exit()
 
-tv = TeleVision((640, 480), stereo=True)
+tv = TeleVision((480, 640), stereo=True)
 
 while True:
     start = time.time()
     ret, frame = cap.read()
     if ret:
         print(f'Frame shape: {frame.shape}')
-        left_frame = frame[:, :frame.shape[1]//2]
-        right_frame = frame[:, frame.shape[1]//2:]
-        combined_frame = np.vstack((left_frame, right_frame))
-        rgb_frame = cv2.cvtColor(combined_frame, cv2.COLOR_BGR2RGB)
+        # Split the frame into left and right
+        width = frame.shape[1]
+        left_frame = frame[:, :width//2]
+        right_frame = frame[:, width//2:]
+        # Combine them into a new frame
+        frame = np.vstack((left_frame, right_frame))
+        rgb_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
         tv.modify_shared_image(rgb_frame)
     end = time.time()
     

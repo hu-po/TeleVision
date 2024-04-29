@@ -8,7 +8,8 @@ class TeleVision:
     def __init__(self, img_shape, stereo=False):
         self.stereo = stereo
 
-        self.app = Vuer(host='0.0.0.0', cert="./cert.pem", key="./key.pem", queries=dict(grid=False))
+        # self.app = Vuer(host='0.0.0.0', cert="./cert.pem", key="./key.pem", queries=dict(grid=False))
+        self.app = Vuer(host='0.0.0.0', cert="", key="", queries=dict(grid=False))
 
         self.app.add_handler("HAND_MOVE")(self.on_hand_move)
         self.app.add_handler("CAMERA_MOVE")(self.on_cam_move)

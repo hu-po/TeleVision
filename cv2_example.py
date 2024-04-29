@@ -5,7 +5,7 @@ from TeleVision import TeleVision
 
 np.set_printoptions(precision=2, suppress=True)
 
-resolution = (720, 1280)  # Desired resolution
+resolution = (1440, 1280)  # Desired resolution
 
 # Create a VideoCapture object and open the input file
 cap = cv2.VideoCapture(0)  # 0 is usually the default camera
@@ -20,7 +20,7 @@ if not cap.isOpened():
     print("Error: Unable to open camera")
     exit()
 
-tv = TeleVision(resolution)
+tv = TeleVision(resolution, stereo=True)
 
 while True:
     start = time.time()

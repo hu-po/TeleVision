@@ -5,7 +5,7 @@ from TeleVision import TeleVision
 
 np.set_printoptions(precision=2, suppress=True)
 
-resolution = (1440, 1280)  # Desired resolution
+resolution = (720, 1280)
 
 # Create a VideoCapture object and open the input file
 cap = cv2.VideoCapture(0)  # 0 is usually the default camera

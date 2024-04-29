@@ -24,6 +24,7 @@ head_matrix_times = []
 
 try:
     while True:
+        print(f'Frame {len(camera_capture_times)}')
         start_cam = time.time()
         ret, frame = cap.read()
         if not ret:
@@ -37,6 +38,7 @@ try:
 
         # Image processing
         start_img_proc = time.time()
+        print('Processing image')
         width = frame.shape[1]
         left_frame = frame[:, :width//2]
         right_frame = frame[:, width//2:]
@@ -50,6 +52,7 @@ try:
         image_processing_times.append(img_proc_time)
 
         # Hand detection
+        print('Detecting hands')
         start_hands = time.time()
         left_hand = tv.left_hand
         right_hand = tv.right_hand
@@ -58,6 +61,7 @@ try:
         hands_times.append(hands_proc_time)
 
         # Head matrix calculation
+        print('Calculating head matrix')
         start_head_matrix = time.time()
         head_matrix = tv.head_matrix
         end_head_matrix = time.time()

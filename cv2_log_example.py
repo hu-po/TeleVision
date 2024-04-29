@@ -51,15 +51,15 @@ try:
 
         # Hand detection
         start_hands = time.time()
-        left_hand = tv.left_hand()
-        right_hand = tv.right_hand()
+        left_hand = tv.left_hand
+        right_hand = tv.right_hand
         end_hands = time.time()
         hands_proc_time = end_hands - start_hands
         hands_times.append(hands_proc_time)
 
         # Head matrix calculation
         start_head_matrix = time.time()
-        head_matrix = tv.head_matrix()
+        head_matrix = tv.head_matrix
         end_head_matrix = time.time()
         head_matrix_proc_time = end_head_matrix - start_head_matrix
         head_matrix_times.append(head_matrix_proc_time)

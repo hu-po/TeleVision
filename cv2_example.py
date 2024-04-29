@@ -19,7 +19,7 @@ while True:
     start = time.time()
     ret, frame = cap.read()
     if ret:
-        print(f'Frame shape: {frame.shape}')
+        # print(f'Frame shape: {frame.shape}')
         # Split the frame into left and right
         width = frame.shape[1]
         left_frame = frame[:, :width//2]

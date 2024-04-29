@@ -85,4 +85,4 @@ finally:
     plt.ylabel('Time (seconds)')
     plt.title('Timing Analysis')
     plt.legend()
-    plt.show()
+    plt.savefig('timing_analysis.png')

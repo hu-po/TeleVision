@@ -24,17 +24,10 @@ tv = TeleVision(resolution, stereo=True)
 
 while True:
     start = time.time()
-
-    # Capture frame-by-frame
     ret, frame = cap.read()
     if ret:
-        # Our operations on the frame come here
         rgb_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-        
-        # Assume the camera only provides one view, so we double it for the shared image
-        tv.modify_shared_image(np.vstack((rgb_frame, rgb_frame)))
-
+        tv.modify_shared_image(rgb_frame)
     end = time.time()
-
-# When everything done, release the capture
+    
 cap.release()

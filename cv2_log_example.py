@@ -119,6 +119,9 @@ finally:
     plt.grid(True)
     plt.savefig('timing_cam.png')
 
+    # HACK: remove first element from full_times to avoid skewing the histogram
+    full_times = full_times[3:]
+
     plt.figure(figsize=(10, 6))
     plt.hist(full_times, bins=100, alpha=0.5, label='Full Loop Time')
     plt.xlabel('Time (seconds)')

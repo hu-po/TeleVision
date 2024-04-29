@@ -21,9 +21,11 @@ camera_capture_times = []
 image_processing_times = []
 hands_times = []
 head_matrix_times = []
+full_times = []
 
 try:
     while True:
+        start_full = time.time()
         # print(f'Frame {len(camera_capture_times)}')
         start_cam = time.time()
         ret, frame = cap.read()
@@ -67,6 +69,10 @@ try:
         end_head_matrix = time.time()
         head_matrix_proc_time = end_head_matrix - start_head_matrix
         head_matrix_times.append(head_matrix_proc_time)
+
+        end_full = time.time()
+        full_time = end_full - start_full
+        full_times.append(full_time)
 
         # Example break condition for testing (e.g., run for 100 frames)
         if len(camera_capture_times) >= 1000:
@@ -112,3 +118,12 @@ finally:
     plt.legend(loc='upper right')
     plt.grid(True)
     plt.savefig('timing_cam.png')
+
+    plt.figure(figsize=(10, 6))
+    plt.hist(full_times, bins=100, alpha=0.5, label='Full Loop Time')
+    plt.xlabel('Time (seconds)')
+    plt.ylabel('Number of Frames')
+    plt.title('Timing Analysis Histograms')
+    plt.legend(loc='upper right')
+    plt.grid(True)
+    plt.savefig('timing_full.png')

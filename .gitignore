@@ -1,3 +1,5 @@
 *.png
 *.urdf
 *.obj
+
+__pycache__/
